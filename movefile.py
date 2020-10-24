@@ -13,7 +13,7 @@ class MyHandler(FileSystemEventHandler):
             new_destination=folder_destination + "/" + filename
             os.rename(src, new_destination)
 
-folder_to_track = '/Users/rsgado/Documentos/Python/OpenCV exercises'
+folder_to_track =  '/Users/rsgado/Documentos/Python/OpenCV exercises'
 folder_destination = '/Users/rsgad/OneDrive/Mestrado/Mestrado 1º ano/1º Semestre/SI/OpenCv exercises'
 event_handler=MyHandler()
 observer=Observer()
