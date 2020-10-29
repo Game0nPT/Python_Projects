@@ -40,10 +40,18 @@ brightness = np.zeros((gray.shape), np.uint8)
 for i in range(rows): 
     for j in range(cols):
         v = gray.item(i,j)
+        #exerc6
+        if v+Z > 255:
+            o = 255
+        elif v+Z < 0:
+            o = 0
+        else:
+            o = v+Z
         
-        o = np.clip(v+Z, 0, 255)
+        #OR
+        #o = np.clip(v+Z, 0, 255)
+        
         brightness.itemset((i,j), o )
-
-cv2.imshow("exercicio 5", brightness)
+cv2.imshow("exercicio 5 e 6", brightness)
 
 cv2.waitKey()

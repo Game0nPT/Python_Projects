@@ -1,20 +1,33 @@
-import cv2
 import numpy as np
+import cv2 as cv
 
-cap = cv2.VideoCapture(0)
+cap = cv.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
 
 while True:
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    # if frame is read correctly ret is True
 
-        ret, frame = cap.read()
+    if not ret:
+        print("Can't receive frame (stream end?). Exiting ...")
+        break
+    # Our operations on the frame come here
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
-        frame = cv2.GaussianBlur(frame, (7,7), 1.9)
+    gray= cv.GaussianBlur(gray, (17,7) , 1.6, 1.6)  
 
-        cv2.imshow("color", frame)
-        
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        cv2.imshow("gray", gray)
-        
-        edges = cv2.Canny(gray, 50, 100)
-        cv2.imshow("edges", edges)
-        
-        cv2.waitKey(10)
+    cv.imshow('filter', gray)
+
+    gray=cv.Canny(gray,50,200)
+    # Display the resulting frame
+    cv.imshow('frame', gray)
+
+    if cv.waitKey(1) == ord('q'):
+        break
+# When everything done, release the capture
+cap.release()
+cv.destroyAllWindows()
